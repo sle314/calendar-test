@@ -1,7 +1,7 @@
 {
   "env": {
     "browser": true,
-    "es2020": true,
+    "es2021": true,
     "jest": true
   },
   "settings": {
@@ -18,7 +18,9 @@
   },
   "parser": "@babel/eslint-parser",
   "extends": [
-    "airbnb"
+    "plugin:react/recommended",
+    "airbnb",
+    "plugin:prettier/recommended"
   ],
   "parserOptions": {
     "ecmaFeatures": {
@@ -35,9 +37,24 @@
     "react",
     "react-hooks",
     "simple-import-sort",
-    "import"
+    "import",
+    "prettier"
   ],
   "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "endOfLine": "auto",
+        "singleQuote": true,
+        "trailingComma": "all",
+        "arrowParens": "avoid",
+        "printWidth": 100,
+        "bracketSpacing": true,
+        "jsxBracketSameLine": false,
+        "semi": false
+      }
+    ],
+    "no-unused-vars": 1,
     "no-restricted-globals": 0,
     "no-underscore-dangle": 0,
     "global-require": 0,
@@ -105,7 +122,6 @@
         ]
       }
     ],
-    "simple-import-sort/exports": "error",
-    "semi": ["error", "never"]
+    "simple-import-sort/exports": "error"
   }
 }

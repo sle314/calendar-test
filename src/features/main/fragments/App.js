@@ -1,16 +1,24 @@
-import { useCallback } from 'react'
-import { GoogleLogin } from '@react-oauth/google'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
-import { AppProvider } from './AppProvider'
+import { Route as RouteMapping } from 'core/common'
 
-export const App = () => {
-  const handleSuccess = useCallback((credentialResponse) => {
-    console.error(credentialResponse)
-  }, [])
+import { AuthLayout, PublicOnlyLayout } from 'features/auth'
+import { Home } from 'features/home'
+import { Login } from 'features/login'
+import { Logout } from 'features/logout'
 
-  return (
-    <AppProvider>
-      <GoogleLogin onSuccess={handleSuccess} />
-    </AppProvider>
-  )
-}
+export const App = () => (
+  <BrowserRouter>
+    <Routes>
+      <Route element={<PublicOnlyLayout to={RouteMapping.Home} />}>
+        <Route exact path={RouteMapping.Login} element={<Login />} />
+      </Route>
+      <Route element={<AuthLayout to={RouteMapping.Login} />}>
+        <Route exact path={RouteMapping.Home} element={<Home />} />
+      </Route>
+      <Route element={<AuthLayout to={RouteMapping.Login} />}>
+        <Route exact path={RouteMapping.Logout} element={<Logout />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
+)
