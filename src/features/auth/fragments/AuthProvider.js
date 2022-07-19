@@ -9,11 +9,15 @@ import PropTypes from 'prop-types'
 
 import { fetchWithAuth } from 'core/common'
 
+import { useLocalization } from 'features/localization'
+
 export const AuthProviderContext = createContext()
 
 const InnerAuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null)
   const [error, setError] = useState('')
+
+  const { translations } = useLocalization()
 
   const isAuthorized = Boolean(accessToken)
 
@@ -29,11 +33,11 @@ const InnerAuthProvider = ({ children }) => {
         setAccessToken(response.access_token)
         setError('')
       } else {
-        setError('Please grant access to your calendar.')
+        setError(translations.accessError)
       }
     },
     onError: () => {
-      setError('Login failed. Please try again.')
+      setError(translations.loginError)
     },
   })
 

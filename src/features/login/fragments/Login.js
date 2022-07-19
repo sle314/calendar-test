@@ -1,20 +1,23 @@
 import styled from 'styled-components'
 
-import { Button, Layout } from 'core/ui'
+import { Button } from 'core/ui'
 
 import { useAuth } from 'features/auth'
+import { LayoutWithControls } from 'features/common'
+import { useLocalization } from 'features/localization'
 
 export const Login = () => {
   const { error, login } = useAuth()
+  const { translations } = useLocalization()
 
   return (
-    <Layout
-      headerContentLeft={<h1>Welcome</h1>}
-      headerContentRight={<Button onClick={login}>Login</Button>}
+    <LayoutWithControls
+      headerContentLeft={<h1>{translations.loginTitle}</h1>}
+      headerContentRight={<Button onClick={login}>{translations.login}</Button>}
     >
-      <StyledContentDiv>Hello hello! Please click LOGIN to get started.</StyledContentDiv>
+      <StyledContentDiv>{translations.loginMessage}</StyledContentDiv>
       {error && <StyledErrorDiv>{error}</StyledErrorDiv>}
-    </Layout>
+    </LayoutWithControls>
   )
 }
 

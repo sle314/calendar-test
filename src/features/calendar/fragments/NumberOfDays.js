@@ -3,6 +3,8 @@ import styled from 'styled-components'
 
 import { Select } from 'core/ui'
 
+import { useLocalization } from 'features/localization'
+
 import { Days, DEFAULT_NUMBER_OF_DAYS } from '../constants'
 import { useCalendar } from '../hooks'
 
@@ -14,6 +16,7 @@ const OPTIONS = [
 
 export const NumberOfDays = () => {
   const { setNumOfDays } = useCalendar()
+  const { translations } = useLocalization()
 
   const handleChange = useCallback(
     event => {
@@ -24,7 +27,7 @@ export const NumberOfDays = () => {
 
   return (
     <StyledContainerDiv>
-      <LabelDiv>Days to show:</LabelDiv>
+      <LabelDiv>{translations.daysToShow}</LabelDiv>
       <Select onChange={handleChange} options={OPTIONS} defaultValue={DEFAULT_NUMBER_OF_DAYS} />
     </StyledContainerDiv>
   )

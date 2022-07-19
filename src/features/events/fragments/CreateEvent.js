@@ -2,54 +2,58 @@ import styled from 'styled-components'
 
 import { Button, Input } from 'core/ui'
 
+import { useLocalization } from 'features/localization'
+
 import { useCreateEvent } from '../hooks'
 
 export const CreateEvent = () => {
   const { isSubmitting, handleSubmit, errors, startValidate, endValidate, register } =
     useCreateEvent()
 
+  const { translations } = useLocalization()
+
   return (
     <StyledForm>
       <StyledInputsDiv>
         <StyledLabel htmlFor="name">
-          <StyledLabelDiv>Name</StyledLabelDiv>
+          <StyledLabelDiv>{translations.eventNameLabel}</StyledLabelDiv>
           <Input id="name" {...register('name', { required: true })} />
           {errors.name && errors.name.type === 'required' && (
-            <StyledErrorDiv>Name is required</StyledErrorDiv>
+            <StyledErrorDiv>{translations.eventNameRequired}</StyledErrorDiv>
           )}
         </StyledLabel>
         <StyledLabel htmlFor="start">
-          <StyledLabelDiv>Start date and time</StyledLabelDiv>
+          <StyledLabelDiv>{translations.eventStartLabel}</StyledLabelDiv>
           <Input
             id="start"
             type="datetime-local"
             {...register('start', { required: true, validate: startValidate })}
           />
           {errors.start && errors.start.type === 'validate' && (
-            <StyledErrorDiv>Start should be before end</StyledErrorDiv>
+            <StyledErrorDiv>{translations.eventStartValidation}</StyledErrorDiv>
           )}
           {errors.start && errors.start.type === 'required' && (
-            <StyledErrorDiv>Start is required</StyledErrorDiv>
+            <StyledErrorDiv>{translations.eventStartRequired}</StyledErrorDiv>
           )}
         </StyledLabel>
         <StyledLabel htmlFor="end">
-          <StyledLabelDiv>End date and time</StyledLabelDiv>
+          <StyledLabelDiv>{translations.eventEndLabel}</StyledLabelDiv>
           <Input
             id="end"
             type="datetime-local"
             {...register('end', { required: true, validate: endValidate })}
           />
           {errors.end && errors.end.type === 'validate' && (
-            <StyledErrorDiv>End should be after start</StyledErrorDiv>
+            <StyledErrorDiv>{translations.eventEndValidation}</StyledErrorDiv>
           )}
           {errors.end && errors.end.type === 'required' && (
-            <StyledErrorDiv>End is required</StyledErrorDiv>
+            <StyledErrorDiv>{translations.eventEndRequired}</StyledErrorDiv>
           )}
         </StyledLabel>
       </StyledInputsDiv>
       <StyledSubmitDiv>
         <Button onClick={!isSubmitting ? handleSubmit : undefined}>
-          {!isSubmitting ? 'Submit' : 'Submitting'}
+          {!isSubmitting ? translations.submit : translations.submitting}
         </Button>
       </StyledSubmitDiv>
       {errors.api && <StyledErrorDiv>{errors.api.message}</StyledErrorDiv>}
@@ -76,7 +80,6 @@ const StyledLabel = styled.label`
 
 const StyledLabelDiv = styled.div`
   margin-bottom: ${({ theme }) => theme.space.small};
-  width: 150px;
 `
 
 const StyledErrorDiv = styled.div`

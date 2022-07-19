@@ -1,6 +1,8 @@
 import { useCallback } from 'react'
 import { useForm } from 'react-hook-form'
 
+import { useLocalization } from 'features/localization'
+
 import { useEvents } from './use-events'
 
 export const useCreateEvent = () => {
@@ -14,6 +16,7 @@ export const useCreateEvent = () => {
     reset,
     setError,
   } = useForm()
+  const { translations } = useLocalization()
 
   const onSubmit = useCallback(
     async data => {
@@ -30,10 +33,10 @@ export const useCreateEvent = () => {
       if (created) {
         reset()
       } else {
-        setError('api', { message: 'Something went wrong, please try again.' })
+        setError('api', { message: translations.somethingWentWrong })
       }
     },
-    [createEvent, creating, setError, reset],
+    [createEvent, creating, setError, reset, translations.somethingWentWrong],
   )
 
   const handleSubmitForm = useCallback(

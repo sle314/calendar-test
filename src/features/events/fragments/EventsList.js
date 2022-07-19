@@ -2,12 +2,15 @@ import styled, { css } from 'styled-components'
 
 import { Button, Spinner } from 'core/ui'
 
+import { useLocalization } from 'features/localization'
+
 import { EventListDisplayType } from '../constants'
 import { useEvents, useEventsData } from '../hooks'
 
 export const EventsList = () => {
   const { fetching } = useEvents()
   const { handleDeleteClick, data, displayType } = useEventsData()
+  const { translations } = useLocalization()
 
   const isWeekly = displayType === EventListDisplayType.Week
 
@@ -33,12 +36,14 @@ export const EventsList = () => {
                       event.end.dateTime,
                     ).toLocaleTimeString()}`}
                   </StyledEventTimeDiv>
-                  <DeleteButton onClick={() => handleDeleteClick(event.id)}>Delete</DeleteButton>
+                  <DeleteButton onClick={() => handleDeleteClick(event.id)}>
+                    {translations.delete}
+                  </DeleteButton>
                 </StyledEventDiv>
               ))}
             </StyledEventsDiv>
           ) : (
-            <StyledNoEventsDiv>No events</StyledNoEventsDiv>
+            <StyledNoEventsDiv>{translations.noEvents}</StyledNoEventsDiv>
           )}
         </StyledEventsColumnDiv>
       ))}
