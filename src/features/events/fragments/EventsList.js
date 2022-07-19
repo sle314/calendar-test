@@ -18,26 +18,28 @@ export const EventsList = () => {
       {data.map(({ label, events }) => (
         <StyledEventsColumnDiv key={label}>
           <StyledEventsColumnLabelDiv>{label}</StyledEventsColumnLabelDiv>
-          <StyledEventsDiv>
-            {events.length > 0
-              ? events.map(event => (
-                  <StyledEventDiv key={event.id}>
-                    <StyledEventNameDiv>{event.summary}</StyledEventNameDiv>
-                    {isWeekly && (
-                      <StyledEventDateDiv>
-                        {new Date(event.start.dateTime).toLocaleDateString()}
-                      </StyledEventDateDiv>
-                    )}
-                    <StyledEventTimeDiv>
-                      {`${new Date(event.start.dateTime).toLocaleTimeString()} - ${new Date(
-                        event.end.dateTime,
-                      ).toLocaleTimeString()}`}
-                    </StyledEventTimeDiv>
-                    <DeleteButton onClick={() => handleDeleteClick(event.id)}>Delete</DeleteButton>
-                  </StyledEventDiv>
-                ))
-              : 'No events'}
-          </StyledEventsDiv>
+          {events.length > 0 ? (
+            <StyledEventsDiv>
+              {events.map(event => (
+                <StyledEventDiv key={event.id}>
+                  <StyledEventNameDiv>{event.summary}</StyledEventNameDiv>
+                  {isWeekly && (
+                    <StyledEventDateDiv>
+                      {new Date(event.start.dateTime).toLocaleDateString()}
+                    </StyledEventDateDiv>
+                  )}
+                  <StyledEventTimeDiv>
+                    {`${new Date(event.start.dateTime).toLocaleTimeString()} - ${new Date(
+                      event.end.dateTime,
+                    ).toLocaleTimeString()}`}
+                  </StyledEventTimeDiv>
+                  <DeleteButton onClick={() => handleDeleteClick(event.id)}>Delete</DeleteButton>
+                </StyledEventDiv>
+              ))}
+            </StyledEventsDiv>
+          ) : (
+            <StyledNoEventsDiv>No events</StyledNoEventsDiv>
+          )}
         </StyledEventsColumnDiv>
       ))}
     </StyledEventsListDiv>
@@ -67,7 +69,6 @@ const StyledEventsColumnLabelDiv = styled.div`
   display: flex;
   justify-content: center;
   ${padding};
-  margin-bottom: ${({ theme }) => theme.space.small};
   border-bottom: 1px solid black;
   font-size: 1.4rem;
 `
@@ -78,6 +79,10 @@ const StyledEventsDiv = styled.div`
   align-items: flex-start;
   font-size: 1.2rem;
   ${padding};
+`
+
+const StyledNoEventsDiv = styled(StyledEventsDiv)`
+  align-items: center;
 `
 
 const StyledEventDiv = styled.div`

@@ -5,12 +5,11 @@ import { Layout, LinkButton } from 'core/ui'
 import { Calendar } from './Calendar'
 
 export const Home = () => (
-  <Layout>
-    <StyledLogoutContainerDiv>
-      <LinkButton to="/logout">Logout</LinkButton>
-    </StyledLogoutContainerDiv>
+  <Layout
+    headerContentLeft={<h1>Your Calendar</h1>}
+    headerContentRight={<LinkButton to="/logout">Logout</LinkButton>}
+  >
     <StyledCalendarContainerDiv>
-      <h1>Your Calendar</h1>
       <Calendar />
     </StyledCalendarContainerDiv>
   </Layout>
@@ -18,8 +17,4 @@ export const Home = () => (
 
 const StyledCalendarContainerDiv = styled.div`
   width: 100%;
-`
-
-const StyledLogoutContainerDiv = styled.div`
-  display: flex;
 `

@@ -8,15 +8,25 @@ export const Login = () => {
   const { error, login } = useAuth()
 
   return (
-    <Layout>
-      <h1>Welcome</h1>
-      <Button onClick={login}>Login</Button>
-      {error && <ErrorDiv>{error}</ErrorDiv>}
+    <Layout
+      headerContentLeft={<h1>Welcome</h1>}
+      headerContentRight={<Button onClick={login}>Login</Button>}
+    >
+      <StyledContentDiv>Hello hello! Please Click on LOGIN to get started.</StyledContentDiv>
+      {error && <StyledErrorDiv>{error}</StyledErrorDiv>}
     </Layout>
   )
 }
 
-const ErrorDiv = styled.div`
+const StyledContentDiv = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  padding-top: ${({ theme }) => theme.space.xlarge};
+`
+
+const StyledErrorDiv = styled.div`
   margin-top: ${({ theme }) => theme.space.large};
   color: red;
 `

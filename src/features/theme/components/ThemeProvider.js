@@ -44,7 +44,7 @@ const GlobalStyle = createGlobalStyle`
     font-weight: 500;
   }
 
-  div {
+  div, header, footer {
     box-sizing: border-box;
   }
 `
