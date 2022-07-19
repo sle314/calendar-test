@@ -1,5 +1,10 @@
 import { createContext, useCallback, useMemo, useState } from 'react'
-import { googleLogout, GoogleOAuthProvider, useGoogleLogin } from '@react-oauth/google'
+import {
+  googleLogout,
+  GoogleOAuthProvider,
+  hasGrantedAllScopesGoogle,
+  useGoogleLogin,
+} from '@react-oauth/google'
 import PropTypes from 'prop-types'
 
 import { fetchWithAuth } from 'core/common'
@@ -8,13 +13,27 @@ export const AuthProviderContext = createContext()
 
 const InnerAuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null)
+  const [error, setError] = useState('')
 
   const isAuthorized = Boolean(accessToken)
 
   const login = useGoogleLogin({
     scope: `${process.env.REACT_APP_GOOGLE_API_SCOPE}`,
     onSuccess: response => {
-      setAccessToken(response.access_token)
+      const hasAccess = hasGrantedAllScopesGoogle(
+        response,
+        `${process.env.REACT_APP_GOOGLE_API_SCOPE}`,
+      )
+
+      if (hasAccess) {
+        setAccessToken(response.access_token)
+        setError('')
+      } else {
+        setError('Please grant access to your calendar.')
+      }
+    },
+    onError: () => {
+      setError('Login failed. Please try again.')
     },
   })
 
@@ -28,11 +47,12 @@ const InnerAuthProvider = ({ children }) => {
   const value = useMemo(
     () => ({
       authFetch,
+      error,
       isAuthorized,
       login,
       logout,
     }),
-    [authFetch, isAuthorized, login, logout],
+    [authFetch, error, isAuthorized, login, logout],
   )
 
   return <AuthProviderContext.Provider value={value}>{children}</AuthProviderContext.Provider>
