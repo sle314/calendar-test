@@ -17,4 +17,4 @@ const WeekDay = {
   Friday: 5,
 }
 
-export const WEEK_START_DAY = WeekDay.Sunday
+export const WEEK_START_DAY = WeekDay.Monday

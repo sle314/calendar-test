@@ -1,4 +1,5 @@
 import { createContext, useCallback, useMemo, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import {
   googleLogout,
   GoogleOAuthProvider,
@@ -7,7 +8,7 @@ import {
 } from '@react-oauth/google'
 import PropTypes from 'prop-types'
 
-import { fetchWithAuth } from 'core/common'
+import { fetchWithAuth, Route } from 'core/common'
 
 import { useLocalization } from 'features/localization'
 
@@ -16,6 +17,7 @@ export const AuthProviderContext = createContext()
 const InnerAuthProvider = ({ children }) => {
   const [accessToken, setAccessToken] = useState(null)
   const [error, setError] = useState('')
+  const navigate = useNavigate()
 
   const { translations } = useLocalization()
 
@@ -46,7 +48,15 @@ const InnerAuthProvider = ({ children }) => {
     setAccessToken(null)
   }, [])
 
-  const authFetch = useMemo(() => (accessToken ? fetchWithAuth(accessToken) : null), [accessToken])
+  const authFetch = useMemo(
+    () =>
+      accessToken
+        ? fetchWithAuth(accessToken, () => {
+            navigate(Route.Logout)
+          })
+        : null,
+    [accessToken, navigate],
+  )
 
   const value = useMemo(
     () => ({

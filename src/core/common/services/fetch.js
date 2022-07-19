@@ -1,6 +1,8 @@
+import { noop } from '../constants'
+
 export const fetchWithAuth =
-  accessToken =>
-  (url, options = {}) => {
+  (accessToken, onUnauthorized = noop) =>
+  async (url, options = {}) => {
     const updatedOptions = { ...options }
 
     if (accessToken) {
@@ -10,5 +12,11 @@ export const fetchWithAuth =
       }
     }
 
-    return fetch(url, updatedOptions)
+    const response = await fetch(url, updatedOptions)
+
+    if (response.status === 401) {
+      onUnauthorized()
+    }
+
+    return response
   }
