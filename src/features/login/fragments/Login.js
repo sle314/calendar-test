@@ -31,5 +31,5 @@ const StyledContentDiv = styled.div`
 
 const StyledErrorDiv = styled.div`
   margin-top: ${({ theme }) => theme.space.large};
-  color: red;
+  color: ${({ theme }) => theme.colors.error};
 `

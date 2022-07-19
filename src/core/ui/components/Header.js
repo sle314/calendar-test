@@ -13,7 +13,7 @@ const StyledHeader = styled.header`
   align-items: center;
   /* height: 70px; */
   width: 100%;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
   padding: ${({ theme }) => `0 ${theme.space.xlarge}`};
 `
 

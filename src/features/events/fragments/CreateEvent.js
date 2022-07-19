@@ -83,7 +83,7 @@ const StyledLabelDiv = styled.div`
 `
 
 const StyledErrorDiv = styled.div`
-  color: red;
+  color: ${({ theme }) => theme.colors.error};
   margin-top: ${({ theme }) => theme.space.small};
   font-size: 1.2rem;
 `

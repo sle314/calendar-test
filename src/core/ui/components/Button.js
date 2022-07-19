@@ -1,9 +1,10 @@
 import styled, { css } from 'styled-components'
 
 export const buttonStyle = css`
-  border: 1px solid black;
+  color: ${({ theme }) => theme.colors.primary};
+  border: 1px solid ${({ theme }) => theme.colors.primary};
   padding: 8px 16px;
-  background: white;
+  background: ${({ theme }) => theme.colors.secondary};
   margin: 0;
   opacity: 1;
   transition: opacity 0.3s ease-in-out;

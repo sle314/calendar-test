@@ -20,5 +20,7 @@
   "submitting": "Dodajem...",
   "delete": "Obriši",
   "noEvents": "Nema događaja",
-  "somethingWentWrong": "Nešto je pošlo po zlu. Molimo Vas pokušajte ponovno."
+  "somethingWentWrong": "Nešto je pošlo po zlu. Molimo Vas pokušajte ponovno.",
+  "lightTheme": "prozračno",
+  "darkTheme": "tamno"
 }

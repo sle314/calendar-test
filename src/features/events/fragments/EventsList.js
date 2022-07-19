@@ -59,7 +59,7 @@ const StyledEventsColumnDiv = styled.div`
   display: flex;
   flex-direction: column;
   flex: 1;
-  border-right: 1px solid black;
+  border-right: 1px solid ${({ theme }) => theme.colors.primary};
 
   :last-child {
     border-right: none;
@@ -74,7 +74,7 @@ const StyledEventsColumnLabelDiv = styled.div`
   display: flex;
   justify-content: center;
   ${padding};
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
   font-size: 1.4rem;
 `
 
@@ -93,9 +93,10 @@ const StyledNoEventsDiv = styled(StyledEventsDiv)`
 const StyledEventDiv = styled.div`
   margin-bottom: ${({ theme }) => theme.space.medium};
   padding: ${({ theme }) => theme.space.small};
-  background: lightblue;
+  background: ${({ theme }) => theme.colors.primary};
   width: 100%;
   max-width: 200px;
+  color: ${({ theme }) => theme.colors.secondary};
 `
 
 const StyledEventNameDiv = styled.div`

@@ -20,5 +20,7 @@
   "submitting": "Submitting...",
   "delete": "Delete",
   "noEvents": "No events",
-  "somethingWentWrong": "Something went wrong, please try again."
+  "somethingWentWrong": "Something went wrong, please try again.",
+  "lightTheme": "light",
+  "darkTheme": "dark"
 }

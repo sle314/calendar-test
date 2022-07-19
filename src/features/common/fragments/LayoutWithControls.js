@@ -4,6 +4,7 @@ import styled from 'styled-components'
 import { Layout } from 'core/ui'
 
 import { LanguageSwitcher } from 'features/localization'
+import { ThemeSwitcher } from 'features/theme'
 
 export const LayoutWithControls = ({ headerContentLeft, headerContentRight, children }) => (
   <Layout
@@ -11,9 +12,12 @@ export const LayoutWithControls = ({ headerContentLeft, headerContentRight, chil
     headerContentRight={
       <StyledContentRightDiv>
         {headerContentRight}
-        <StyledLanguageSwitcherContainerDiv>
+        <StyledSwitcherContainerDiv>
           <LanguageSwitcher />
-        </StyledLanguageSwitcherContainerDiv>
+        </StyledSwitcherContainerDiv>
+        <StyledSwitcherContainerDiv>
+          <ThemeSwitcher />
+        </StyledSwitcherContainerDiv>
       </StyledContentRightDiv>
     }
   >
@@ -26,9 +30,9 @@ const StyledContentRightDiv = styled.div`
   align-items: center;
 `
 
-const StyledLanguageSwitcherContainerDiv = styled.div`
+const StyledSwitcherContainerDiv = styled.div`
   margin-left: ${({ theme }) => theme.space.medium};
-  width: 20px;
+  width: auto;
   text-align: center;
 `
 

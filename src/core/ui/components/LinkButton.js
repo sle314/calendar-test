@@ -6,6 +6,5 @@ import { buttonStyle } from './Button'
 export const LinkButton = styled(RouterLink)`
   ${buttonStyle};
 
-  color: black;
   text-decoration: none;
 `
