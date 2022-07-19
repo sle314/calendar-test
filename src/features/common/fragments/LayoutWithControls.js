@@ -34,6 +34,7 @@ const StyledSwitcherContainerDiv = styled.div`
   margin-left: ${({ theme }) => theme.space.medium};
   width: auto;
   text-align: center;
+  width: 30px;
 `
 
 LayoutWithControls.propTypes = {

@@ -1,7 +1,7 @@
 {
   "login": "Login",
   "loginTitle": "Welcome",
-  "loginMessage": "Hello hello! Please click LOGIN to get started.",
+  "loginMessage": "Hello hello! Please login to get started.",
   "loginError": "Login failed. Please try again.",
   "logout": "Logout",
   "homeTitle": "Your Calendar",

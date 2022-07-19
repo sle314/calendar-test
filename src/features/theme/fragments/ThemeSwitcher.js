@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import styled from 'styled-components'
 
-import { Button } from 'core/ui'
+import { Button, MoonIcon, SunIcon } from 'core/ui'
 
 import { useLocalization } from 'features/localization'
 
@@ -12,13 +12,18 @@ export const ThemeSwitcher = () => {
   const { themeType, setThemeType } = useTheme()
   const { translations } = useLocalization()
 
-  const oppositeKey = themeType === ThemeType.Light ? ThemeType.Dark : ThemeType.Light
+  const isLight = themeType === ThemeType.Light
+  const oppositeKey = isLight ? ThemeType.Dark : ThemeType.Light
 
   const handleThemeClick = useCallback(() => {
     setThemeType(oppositeKey)
   }, [oppositeKey, setThemeType])
 
-  return <ThemeButton onClick={handleThemeClick}>{translations[`${oppositeKey}Theme`]}</ThemeButton>
+  return (
+    <ThemeButton onClick={handleThemeClick} title={translations[`${oppositeKey}Theme`]}>
+      {isLight ? <MoonIcon /> : <SunIcon />}
+    </ThemeButton>
+  )
 }
 
 const ThemeButton = styled(Button)`
