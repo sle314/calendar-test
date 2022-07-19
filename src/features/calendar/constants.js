@@ -7,3 +7,14 @@ export const Days = {
 }
 
 export const DEFAULT_NUMBER_OF_DAYS = Days.Seven
+
+const WeekDay = {
+  Sunday: 0,
+  Monday: 1,
+  Tuesday: 2,
+  Wednesday: 3,
+  Thursday: 4,
+  Friday: 5,
+}
+
+export const WEEK_START_DAY = WeekDay.Sunday

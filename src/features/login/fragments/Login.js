@@ -12,7 +12,7 @@ export const Login = () => {
       headerContentLeft={<h1>Welcome</h1>}
       headerContentRight={<Button onClick={login}>Login</Button>}
     >
-      <StyledContentDiv>Hello hello! Please Click on LOGIN to get started.</StyledContentDiv>
+      <StyledContentDiv>Hello hello! Please click LOGIN to get started.</StyledContentDiv>
       {error && <StyledErrorDiv>{error}</StyledErrorDiv>}
     </Layout>
   )
