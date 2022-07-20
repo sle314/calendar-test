@@ -8,14 +8,19 @@ import {
 } from '@react-oauth/google'
 import PropTypes from 'prop-types'
 
-import { fetchWithAuth, Route } from 'core/common'
+import { fetchWithAuth, getPrefixedKey, Route, useStateWithLocalStorage } from 'core/common'
 
 import { useLocalization } from 'features/localization'
+
+const LOCAL_STORAGE_KEY = getPrefixedKey('access-token')
 
 export const AuthProviderContext = createContext()
 
 const InnerAuthProvider = ({ children }) => {
-  const [accessToken, setAccessToken] = useState(null)
+  const [accessToken, setAccessToken, unsetAccessToken] = useStateWithLocalStorage(
+    LOCAL_STORAGE_KEY,
+    null,
+  )
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
@@ -45,8 +50,8 @@ const InnerAuthProvider = ({ children }) => {
 
   const logout = useCallback(() => {
     googleLogout()
-    setAccessToken(null)
-  }, [])
+    unsetAccessToken()
+  }, [unsetAccessToken])
 
   const authFetch = useMemo(
     () =>

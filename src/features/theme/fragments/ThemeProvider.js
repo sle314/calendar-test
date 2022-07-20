@@ -1,8 +1,8 @@
-import React, { createContext, useCallback, useMemo, useState } from 'react'
+import React, { createContext, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { ThemeProvider as StyledThemeProvider } from 'styled-components'
 
-import { getPrefixedKey } from 'core/common'
+import { getPrefixedKey, useStateWithLocalStorage } from 'core/common'
 
 import { GlobalStyle, ThemeType } from '../constants'
 import { darkTheme, lightTheme } from '../themes'
@@ -20,14 +20,10 @@ export const ThemeProvider = ({
   children,
   initialThemeType: initialThemeTypeProp = ThemeType.Default,
 }) => {
-  const [themeType, setThemeTypeValue] = useState(
-    localStorage.getItem(LOCAL_STORAGE_KEY) || initialThemeTypeProp,
+  const [themeType, setThemeType] = useStateWithLocalStorage(
+    LOCAL_STORAGE_KEY,
+    initialThemeTypeProp,
   )
-
-  const setThemeType = useCallback(themeTypeValue => {
-    setThemeTypeValue(themeTypeValue)
-    localStorage.setItem(LOCAL_STORAGE_KEY, themeTypeValue)
-  }, [])
 
   const theme = useMemo(() => THEME_MAPPING[themeType], [themeType])
 
