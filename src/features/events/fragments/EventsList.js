@@ -18,9 +18,14 @@ export const EventsList = () => {
     <Spinner />
   ) : (
     <StyledEventsListDiv>
-      {data.map(({ label, events }) => (
+      {data.map(({ label, events, weekdayTranslationKey }) => (
         <StyledEventsColumnDiv key={label}>
-          <StyledEventsColumnLabelDiv>{label}</StyledEventsColumnLabelDiv>
+          <StyledEventsColumnLabelDiv>
+            {!isWeekly && weekdayTranslationKey !== undefined && (
+              <StyledEventsDayDiv>{translations[weekdayTranslationKey]}</StyledEventsDayDiv>
+            )}
+            <StyledEventsLabelDiv>{label}</StyledEventsLabelDiv>
+          </StyledEventsColumnLabelDiv>
           {events.length > 0 ? (
             <StyledEventsDiv>
               {events.map(event => (
@@ -72,10 +77,23 @@ const padding = css`
 
 const StyledEventsColumnLabelDiv = styled.div`
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
   ${padding};
   border-bottom: 1px solid ${({ theme }) => theme.colors.primary};
   font-size: 1.4rem;
+`
+
+const StyledEventsDayDiv = styled.div`
+  font-size: 1.2rem;
+  margin-bottom: ${({ theme }) => theme.space.small};
+  text-align: center;
+  font-weight: 500;
+`
+
+const StyledEventsLabelDiv = styled.div`
+  text-align: center;
 `
 
 const StyledEventsDiv = styled.div`
@@ -88,6 +106,7 @@ const StyledEventsDiv = styled.div`
 
 const StyledNoEventsDiv = styled(StyledEventsDiv)`
   align-items: center;
+  font-size: 1.4rem;
 `
 
 const StyledEventDiv = styled.div`

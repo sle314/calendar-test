@@ -22,5 +22,12 @@
   "noEvents": "Nema događaja",
   "somethingWentWrong": "Nešto je pošlo po zlu. Molimo Vas pokušajte ponovno.",
   "lightTheme": "prozračno",
-  "darkTheme": "tamno"
+  "darkTheme": "tamno",
+  "monday": "Ponedjeljak",
+  "tuesday": "Utorak",
+  "wednesday": "Srijeda",
+  "thursday": "Četvrtak",
+  "friday": "Petak",
+  "saturday": "Subota",
+  "sunday": "Nedjelja"
 }

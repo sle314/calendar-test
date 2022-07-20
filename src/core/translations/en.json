@@ -22,5 +22,12 @@
   "noEvents": "No events",
   "somethingWentWrong": "Something went wrong, please try again.",
   "lightTheme": "light",
-  "darkTheme": "dark"
+  "darkTheme": "dark",
+  "monday": "Monday",
+  "tuesday": "Tuesday",
+  "wednesday": "Wednesday",
+  "thursday": "Thursday",
+  "friday": "Friday",
+  "saturday": "Saturday",
+  "sunday": "Sunday"
 }

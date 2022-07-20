@@ -1,4 +1,4 @@
-import { WEEK_START_DAY } from 'features/calendar'
+import { WEEK_START_DAY, WeekdayTranslationKey } from 'features/calendar'
 
 export const getEventsDataDaily = (numOfDays, events) => {
   const data = []
@@ -7,6 +7,7 @@ export const getEventsDataDaily = (numOfDays, events) => {
     const date = new Date()
     date.setDate(date.getDate() + i)
     data.push({
+      weekdayTranslationKey: WeekdayTranslationKey[date.getDay()],
       label: date.toLocaleDateString(),
       events: events[date.toLocaleDateString('sv')] || [],
     })
