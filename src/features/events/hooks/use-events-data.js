@@ -13,7 +13,9 @@ export const useEventsData = () => {
   const displayType = numOfDays >= 30 ? EventListDisplayType.Week : EventListDisplayType.Day
 
   const eventData = useMemo(() => {
-    const orderedEvents = [...events].sort((a, b) => (a.start.dateTime < b.start.dateTime ? -1 : 1))
+    const orderedEvents = [...events]
+      .filter(event => event.start && event.end)
+      .sort((a, b) => (a.start.dateTime < b.start.dateTime ? -1 : 1))
 
     const eventsByDays = {}
     orderedEvents.forEach(event => {
